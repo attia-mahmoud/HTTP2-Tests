@@ -1,0 +1,13 @@
+{
+    "role": "client",
+    "client": "client",
+    "server": "server",
+    "controller_conf_filename": "controller_configuration.json",
+    "host": "172.236.62.68",
+    "port": "443",
+    "client_frames": [
+        {
+            "type": "HEADERS"
+        }
+    ]
+}
