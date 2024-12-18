@@ -16,22 +16,16 @@
       "SETTING_UP_CONTROL_CHANNEL": {
         "entry": [
           {
-            "type": "get_from_file (variables role) (role)"
+            "type": "get_from_file (variables host) (host)"
           },
           {
-            "type": "get_from_file (variables client) (client)"
+            "type": "get_from_file (variables port) (port)"
           },
           {
-            "type": "get_from_file (variables server) (server)"
+            "type": "create_http_2_server (host port) (server)"
           },
           {
-            "type": "get_from_file (variables controller_conf_filename) (controller_conf_filename)"
-          },
-          {
-            "type": "call (CONTROL_CHANNEL_SET_UP role controller_conf_filename) (event ctrl)"
-          },
-          {
-            "type": "trigger (event)"
+            "type": "done"
           }
         ],
         "on": {
