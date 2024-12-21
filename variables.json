@@ -5,7 +5,7 @@
     "controller_conf_filename": "controller_configuration.json",
     "host": "172.236.62.68",
     "port": "443",
-    "tls_enabled": false,
+    "tls_enabled": "false",
     "protocol": "h2",
     "connection_settings_server": {},
     "connection_settings_client": {},
