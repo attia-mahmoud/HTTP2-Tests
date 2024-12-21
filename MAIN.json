@@ -6,9 +6,27 @@
       "on": {
         "STARTED": [
           {
-            "target": "SETTING_UP_CONTROL_CHANNEL",
+            "target": "DEFINING_TIMEOUT_TARGET",
             "actions": [],
             "meta": {}
+          }
+        ]
+      }
+    },
+    "DEFINING_TIMEOUT_TARGET": {
+      "entry": [
+        {
+          "type": "redirect (\"TIMEOUT\" \"ERROR\")"
+        },
+        {
+          "type": "done"
+        }
+      ],
+      "on": {
+        "DONE": [
+          {
+            "target": "SETTING_UP_CONTROL_CHANNEL",
+            "actions": []
           }
         ]
       }
@@ -249,7 +267,7 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "receive_client_frames(server client_frames)"
+          "type": "receive_client_frames(server client_frames) (result)"
         },
         {
           "type": "done"
@@ -296,6 +314,11 @@
           "type": "done"
         }
       ]
+    },
+    "ERROR": {
+      "entry": {
+        "type": "set (\"TIMEOUT\") (result)"
+      }
     }
   }
 }

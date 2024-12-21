@@ -11,7 +11,17 @@
     "connection_settings_client": {},
     "client_frames": [
         {
-            "type": "HEADERS"
+            "type": "HEADERS",
+            "tests": [
+                [
+                    {
+                        "function": "verifytype",
+                        "params": [
+                            "RequestReceived"
+                        ]
+                    }
+                ]
+            ]
         }
     ],
     "server_frames": []
