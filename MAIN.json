@@ -16,7 +16,7 @@
     "SET_TIMEOUT_TARGET": {
       "entry": [
         {
-          "type": "redirect (\"TIMEOUT\") (\"TIMEOUT\")"
+          "type": "redirect (\"TIMEOUT\" \"TIMEOUT\")"
         },
         {
           "type": "done"
