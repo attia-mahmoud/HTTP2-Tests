@@ -6,17 +6,17 @@
       "on": {
         "STARTED": [
           {
-            "target": "DEFINING_TIMEOUT_TARGET",
+            "target": "SET_TIMEOUT_TARGET",
             "actions": [],
             "meta": {}
           }
         ]
       }
     },
-    "DEFINING_TIMEOUT_TARGET": {
+    "SET_TIMEOUT_TARGET": {
       "entry": [
         {
-          "type": "redirect (\"TIMEOUT\" \"ERROR\")"
+          "type": "redirect (\"TIMEOUT\") (\"TIMEOUT\")"
         },
         {
           "type": "done"
@@ -86,7 +86,7 @@
           "type": "wait (waiting_time)"
         },
         {
-          "type": "call (HTTP2_CLIENT_BUILD) (event client)"
+          "type": "call (HTTP2_CLIENT_BUILD) (event)"
         },
         {
           "type": "trigger (event)"
@@ -98,10 +98,10 @@
             "target": "WAITING_SERVER_PREFACE",
             "actions": [
               {
-                "type": "assign (ctrl) (ctrl)"
+                "type": "assign (client) (client)"
               },
               {
-                "type": "assign (client) (client)"
+                "type": "assign (ctrl) (ctrl)"
               }
             ]
           }
@@ -136,7 +136,7 @@
     "WAITING_SERVER_PREFACE": {
       "entry": [
         {
-          "type": "wait_for_server_preface(client)"
+          "type": "wait_for_server_preface (client)"
         },
         {
           "type": "done"
@@ -161,7 +161,7 @@
     "WAITING_CLIENT_PREFACE": {
       "entry": [
         {
-          "type": "wait_for_client_preface(server)"
+          "type": "wait_for_client_preface (server)"
         },
         {
           "type": "done"
@@ -186,7 +186,7 @@
     "WAITING_SERVER_ACK": {
       "entry": [
         {
-          "type": "wait_for_server_ack(client)"
+          "type": "wait_for_server_ack (client)"
         },
         {
           "type": "done"
@@ -211,7 +211,7 @@
     "WAITING_CLIENT_ACK": {
       "entry": [
         {
-          "type": "wait_for_client_ack(server)"
+          "type": "wait_for_client_ack (server)"
         },
         {
           "type": "done"
@@ -239,7 +239,7 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "send_client_frames(client client_frames)"
+          "type": "send_client_frames (client client_frames)"
         },
         {
           "type": "done"
@@ -267,7 +267,7 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "receive_client_frames(server client_frames) (result)"
+          "type": "receive_client_frames (server client_frames)"
         },
         {
           "type": "done"
@@ -295,7 +295,7 @@
           "type": "get_from_file (variables server_frames) (server_frames)"
         },
         {
-          "type": "receive_server_frames (client server_frames)"
+          "type": "receive_server_frames (server server_frames)"
         },
         {
           "type": "done"
@@ -315,7 +315,7 @@
         }
       ]
     },
-    "ERROR": {
+    "TIMEOUT": {
       "entry": {
         "type": "set (\"TIMEOUT\") (result)"
       }
