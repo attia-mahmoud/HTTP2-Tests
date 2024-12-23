@@ -71,6 +71,12 @@
             "actions": [
               {
                 "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
               }
             ]
           }
@@ -133,6 +139,12 @@
               },
               {
                 "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (role) (role)"
               }
             ]
           }
@@ -201,6 +213,12 @@
               },
               {
                 "type": "assign (msg) (msg)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
               }
             ]
           }
@@ -221,11 +239,25 @@
           {
             "target": "WAITING_SERVER_ACK",
             "cond": "equal (role client_val)",
-            "actions": []
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              }
+            ]
           },
           {
             "target": "WAITING_CLIENT_ACK",
-            "actions": []
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              }
+            ]
           }
         ]
       }
