@@ -101,7 +101,7 @@
       "RETURNING_SYNC_MESSAGES": {
         "entry": [
           {
-            "type": "set (DONE) (event)"
+            "type": "set (EXCHANGED_MSGS) (event)"
           },
           {
             "type": "return_values (event msg)"
