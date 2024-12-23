@@ -37,10 +37,7 @@
           "type": "get_from_file (variables role) (role)"
         },
         {
-          "type": "get_from_file (variables client) (client)"
-        },
-        {
-          "type": "get_from_file (variables server) (server)"
+          "type": "get_from_file (variables client) (client_val)"
         },
         {
           "type": "get_from_file (variables controller_conf_filename) (controller_conf_filename)"
@@ -56,13 +53,16 @@
         "CONTROL_CHANNEL_READY": [
           {
             "target": "BUILDING_HTTP2_CLIENT",
-            "cond": "equal (role client)",
+            "cond": "equal (role client_val)",
             "actions": [
               {
                 "type": "assign (role) (role)"
               },
               {
                 "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
               }
             ]
           },
@@ -102,6 +102,12 @@
               },
               {
                 "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (role) (role)"
               }
             ]
           }
@@ -139,19 +145,31 @@
           "type": "wait_for_server_preface (client)"
         },
         {
+          "type": "set (\"PREFACE_RECEIVED_AT_SERVER\") (msg)"
+        },
+        {
           "type": "done"
         }
       ],
       "on": {
         "DONE": [
           {
-            "target": "WAITING_SERVER_ACK",
+            "target": "EXCHANGING_SYNC",
             "actions": [
               {
                 "type": "assign (client) (client)"
               },
               {
                 "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (msg) (msg)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
               }
             ]
           }
@@ -159,21 +177,55 @@
       }
     },
     "WAITING_CLIENT_PREFACE": {
-      "entry": {
-        "type": "wait_for_client_preface (server)"
-      },
+      "entry": [
+        {
+          "type": "wait_for_client_preface (server)"
+        },
+        {
+          "type": "set (\"PREFACE_RECEIVED_AT_CLIENT\") (msg)"
+        },
+        {
+          "type": "done"
+        }
+      ],
       "on": {
-        "PREFACE_RECEIVED": [
+        "DONE": [
           {
-            "target": "WAITING_CLIENT_ACK",
+            "target": "EXCHANGING_SYNC",
             "actions": [
               {
                 "type": "assign (server) (server)"
               },
               {
                 "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (msg) (msg)"
               }
             ]
+          }
+        ]
+      }
+    },
+    "EXCHANGING_SYNC": {
+      "entry": [
+        {
+          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "Done": [
+          {
+            "target": "WAITING_SERVER_ACK",
+            "cond": "equal (role client_val)",
+            "actions": []
+          },
+          {
+            "target": "WAITING_CLIENT_ACK",
+            "actions": []
           }
         ]
       }
