@@ -86,7 +86,7 @@
           "type": "wait (waiting_time)"
         },
         {
-          "type": "call (HTTP2_CLIENT_BUILD) (event)"
+          "type": "call (HTTP2_CLIENT_BUILD) (event client)"
         },
         {
           "type": "trigger (event)"
@@ -159,16 +159,11 @@
       }
     },
     "WAITING_CLIENT_PREFACE": {
-      "entry": [
-        {
-          "type": "wait_for_client_preface (server)"
-        },
-        {
-          "type": "done"
-        }
-      ],
+      "entry": {
+        "type": "wait_for_client_preface (server)"
+      },
       "on": {
-        "DONE": [
+        "PREFACE_RECEIVED": [
           {
             "target": "WAITING_CLIENT_ACK",
             "actions": [
@@ -209,16 +204,11 @@
       }
     },
     "WAITING_CLIENT_ACK": {
-      "entry": [
-        {
-          "type": "wait_for_client_ack (server)"
-        },
-        {
-          "type": "done"
-        }
-      ],
+      "entry": {
+        "type": "wait_for_client_ack (server)"
+      },
       "on": {
-        "DONE": [
+        "ACK_RECEIVED": [
           {
             "target": "RECEIVING_CLIENT_FRAMES",
             "actions": [
@@ -267,7 +257,7 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "receive_client_frames (server client_frames)"
+          "type": "receive_client_frames (server client_frames) (result)"
         },
         {
           "type": "done"
