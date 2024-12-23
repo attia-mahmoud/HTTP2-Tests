@@ -372,7 +372,10 @@
           "type": "receive_server_frames (client server_frames)"
         },
         {
-          "type": "done"
+          "type": "set (FINISHED) (event)"
+        },
+        {
+          "type": "trigger (event)"
         }
       ]
     },
@@ -385,7 +388,10 @@
           "type": "send_server_frames (server server_frames)"
         },
         {
-          "type": "done"
+          "type": "set (FINISHED) (event)"
+        },
+        {
+          "type": "trigger (event)"
         }
       ]
     },
