@@ -217,7 +217,7 @@
         }
       ],
       "on": {
-        "Done": [
+        "DONE": [
           {
             "target": "WAITING_SERVER_ACK",
             "cond": "equal (role client_val)",
