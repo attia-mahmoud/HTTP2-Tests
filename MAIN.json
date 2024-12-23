@@ -154,17 +154,17 @@
     "WAITING_SERVER_PREFACE": {
       "entry": [
         {
-          "type": "wait_for_server_preface (client)"
+          "type": "wait_for_server_preface (client) (event)"
         },
         {
           "type": "set (\"PREFACE_RECEIVED_AT_CLIENT\") (msg)"
         },
         {
-          "type": "done"
+          "type": "trigger (event)"
         }
       ],
       "on": {
-        "DONE": [
+        "PREFACE_RECEIVED": [
           {
             "target": "EXCHANGING_SYNC_PREFACE",
             "actions": [
@@ -191,17 +191,17 @@
     "WAITING_CLIENT_PREFACE": {
       "entry": [
         {
-          "type": "wait_for_client_preface (server)"
+          "type": "wait_for_client_preface (server) (event)"
         },
         {
           "type": "set (\"PREFACE_RECEIVED_AT_SERVER\") (msg)"
         },
         {
-          "type": "done"
+          "type": "trigger (event)"
         }
       ],
       "on": {
-        "DONE": [
+        "PREFACE_RECEIVED": [
           {
             "target": "EXCHANGING_SYNC_PREFACE",
             "actions": [
@@ -235,7 +235,7 @@
         }
       ],
       "on": {
-        "DONE": [
+        "EXCHANGED_MSGS": [
           {
             "target": "WAITING_SERVER_ACK",
             "cond": "equal (role client_val)",
@@ -277,17 +277,17 @@
     "WAITING_SERVER_ACK": {
       "entry": [
         {
-          "type": "wait_for_server_ack (client)"
+          "type": "wait_for_server_ack (client) (event)"
         },
         {
           "type": "set (\"ACK_RECEIVED_AT_CLIENT\") (msg)"
         },
         {
-          "type": "done"
+          "type": "trigger (event)"
         }
       ],
       "on": {
-        "DONE": [
+        "ACK_RECEIVED": [
           {
             "target": "EXCHANGING_SYNC_ACK",
             "actions": [
@@ -314,17 +314,17 @@
     "WAITING_CLIENT_ACK": {
       "entry": [
         {
-          "type": "wait_for_client_ack (server)"
+          "type": "wait_for_client_ack (server) (event)"
         },
         {
           "type": "set (\"ACK_RECEIVED_AT_SERVER\") (msg)"
         },
         {
-          "type": "done"
+          "type": "trigger (event)"
         }
       ],
       "on": {
-        "DONE": [
+        "ACK_RECEIVED": [
           {
             "target": "EXCHANGING_SYNC_ACK",
             "actions": [
@@ -358,7 +358,7 @@
         }
       ],
       "on": {
-        "DONE": [
+        "EXCHANGED_MSGS": [
           {
             "target": "SENDING_CLIENT_FRAMES",
             "cond": "equal (role client_val)",
@@ -391,14 +391,27 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "send_client_frames (client client_frames)"
+          "type": "send_client_frames (client client_frames) (result event)"
         },
         {
-          "type": "done"
+          "type": "trigger (event)"
         }
       ],
       "on": {
-        "DONE": [
+        "TEST_PASSED": [
+          {
+            "target": "RECEIVING_SERVER_FRAMES",
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              }
+            ]
+          }
+        ],
+        "TEST_FAILED": [
           {
             "target": "RECEIVING_SERVER_FRAMES",
             "actions": [
@@ -419,14 +432,27 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "receive_client_frames (server client_frames) (result)"
+          "type": "receive_client_frames (server client_frames) (result event)"
         },
         {
-          "type": "done"
+          "type": "trigger (event)"
         }
       ],
       "on": {
-        "DONE": [
+        "TEST_PASSED": [
+          {
+            "target": "SENDING_SERVER_FRAMES",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              }
+            ]
+          }
+        ],
+        "TEST_FAILED": [
           {
             "target": "SENDING_SERVER_FRAMES",
             "actions": [
