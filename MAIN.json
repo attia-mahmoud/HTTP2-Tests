@@ -285,7 +285,7 @@
           "type": "get_from_file (variables server_frames) (server_frames)"
         },
         {
-          "type": "receive_server_frames (server server_frames)"
+          "type": "receive_server_frames (client server_frames)"
         },
         {
           "type": "done"
