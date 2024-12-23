@@ -157,7 +157,7 @@
           "type": "wait_for_server_preface (client)"
         },
         {
-          "type": "set (\"PREFACE_RECEIVED_AT_SERVER\") (msg)"
+          "type": "set (\"PREFACE_RECEIVED_AT_CLIENT\") (msg)"
         },
         {
           "type": "done"
@@ -166,7 +166,7 @@
       "on": {
         "DONE": [
           {
-            "target": "EXCHANGING_SYNC",
+            "target": "EXCHANGING_SYNC_PREFACE",
             "actions": [
               {
                 "type": "assign (client) (client)"
@@ -194,7 +194,7 @@
           "type": "wait_for_client_preface (server)"
         },
         {
-          "type": "set (\"PREFACE_RECEIVED_AT_CLIENT\") (msg)"
+          "type": "set (\"PREFACE_RECEIVED_AT_SERVER\") (msg)"
         },
         {
           "type": "done"
@@ -203,7 +203,7 @@
       "on": {
         "DONE": [
           {
-            "target": "EXCHANGING_SYNC",
+            "target": "EXCHANGING_SYNC_PREFACE",
             "actions": [
               {
                 "type": "assign (server) (server)"
@@ -225,7 +225,7 @@
         ]
       }
     },
-    "EXCHANGING_SYNC": {
+    "EXCHANGING_SYNC_PREFACE": {
       "entry": [
         {
           "type": "call (EXCHANGE_SYNC ctrl msg) (event msg)"
@@ -245,6 +245,12 @@
               },
               {
                 "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
               }
             ]
           },
@@ -256,6 +262,12 @@
               },
               {
                 "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
               }
             ]
           }
@@ -268,13 +280,85 @@
           "type": "wait_for_server_ack (client)"
         },
         {
+          "type": "set (\"ACK_RECEIVED_AT_CLIENT\") (msg)"
+        },
+        {
           "type": "done"
         }
       ],
       "on": {
         "DONE": [
           {
+            "target": "EXCHANGING_SYNC_ACK",
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (msg) (msg)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "WAITING_CLIENT_ACK": {
+      "entry": [
+        {
+          "type": "wait_for_client_ack (server)"
+        },
+        {
+          "type": "set (\"ACK_RECEIVED_AT_SERVER\") (msg)"
+        }
+      ],
+      "on": {
+        "ACK_RECEIVED": [
+          {
+            "target": "EXCHANGING_SYNC_ACK",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (msg) (msg)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "EXCHANGING_SYNC_ACK": {
+      "entry": [
+        {
+          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "DONE": [
+          {
             "target": "SENDING_CLIENT_FRAMES",
+            "cond": "equal (role client_val)",
             "actions": [
               {
                 "type": "assign (client) (client)"
@@ -283,16 +367,7 @@
                 "type": "assign (ctrl) (ctrl)"
               }
             ]
-          }
-        ]
-      }
-    },
-    "WAITING_CLIENT_ACK": {
-      "entry": {
-        "type": "wait_for_client_ack (server)"
-      },
-      "on": {
-        "ACK_RECEIVED": [
+          },
           {
             "target": "RECEIVING_CLIENT_FRAMES",
             "actions": [
