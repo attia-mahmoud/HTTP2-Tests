@@ -228,7 +228,7 @@
     "EXCHANGING_SYNC_PREFACE": {
       "entry": [
         {
-          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg)"
+          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg_received)"
         },
         {
           "type": "trigger (event)"
@@ -318,10 +318,13 @@
         },
         {
           "type": "set (\"ACK_RECEIVED_AT_SERVER\") (msg)"
+        },
+        {
+          "type": "done"
         }
       ],
       "on": {
-        "ACK_RECEIVED": [
+        "DONE": [
           {
             "target": "EXCHANGING_SYNC_ACK",
             "actions": [
@@ -348,7 +351,7 @@
     "EXCHANGING_SYNC_ACK": {
       "entry": [
         {
-          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg)"
+          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg_received)"
         },
         {
           "type": "trigger (event)"
