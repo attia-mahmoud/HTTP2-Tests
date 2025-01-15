@@ -16,7 +16,7 @@
     "SET_TIMEOUT_TARGET": {
       "entry": [
         {
-          "type": "redirect (\"TIMEOUT\" \"TIMEOUT\")"
+          "type": "redirect (TIMEOUT TIMEOUT)"
         },
         {
           "type": "done"
@@ -157,7 +157,7 @@
           "type": "wait_for_server_preface (client) (event)"
         },
         {
-          "type": "set (\"PREFACE_RECEIVED_AT_CLIENT\") (msg)"
+          "type": "set (PREFACE_RECEIVED_AT_CLIENT) (msg)"
         },
         {
           "type": "trigger (event)"
@@ -194,7 +194,7 @@
           "type": "wait_for_client_preface (server) (event)"
         },
         {
-          "type": "set (\"PREFACE_RECEIVED_AT_SERVER\") (msg)"
+          "type": "set (PREFACE_RECEIVED_AT_SERVER) (msg)"
         },
         {
           "type": "trigger (event)"
@@ -235,7 +235,7 @@
         }
       ],
       "on": {
-        "EXCHANGED_MSGS": [
+        "DONE": [
           {
             "target": "WAITING_SERVER_ACK",
             "cond": "equal (role client_val)",
@@ -280,7 +280,7 @@
           "type": "wait_for_server_ack (client) (event)"
         },
         {
-          "type": "set (\"ACK_RECEIVED_AT_CLIENT\") (msg)"
+          "type": "set (ACK_RECEIVED_AT_CLIENT) (msg)"
         },
         {
           "type": "trigger (event)"
@@ -317,7 +317,7 @@
           "type": "wait_for_client_ack (server) (event)"
         },
         {
-          "type": "set (\"ACK_RECEIVED_AT_SERVER\") (msg)"
+          "type": "set (ACK_RECEIVED_AT_SERVER) (msg)"
         },
         {
           "type": "trigger (event)"
@@ -358,7 +358,7 @@
         }
       ],
       "on": {
-        "EXCHANGED_MSGS": [
+        "DONE": [
           {
             "target": "SENDING_CLIENT_FRAMES",
             "cond": "equal (role client_val)",
@@ -465,7 +465,21 @@
         {
           "type": "trigger (event)"
         }
-      ]
+      ],
+      "on": {
+        "TEST_PASSED": [
+          {
+            "target": "END",
+            "actions": []
+          }
+        ],
+        "TEST_FAILED": [
+          {
+            "target": "END",
+            "actions": []
+          }
+        ]
+      }
     },
     "SENDING_SERVER_FRAMES": {
       "entry": [
@@ -478,11 +492,20 @@
         {
           "type": "trigger (event)"
         }
-      ]
+      ],
+      "on": {
+        "FRAMES_SENT": [
+          {
+            "target": "END",
+            "actions": []
+          }
+        ]
+      }
     },
+    "END": {},
     "TIMEOUT": {
       "entry": {
-        "type": "set (\"TIMEOUT\") (result)"
+        "type": "set (TIMEOUT) (result)"
       }
     }
   }
