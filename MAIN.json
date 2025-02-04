@@ -489,6 +489,9 @@
               },
               {
                 "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
               }
             ]
           }
@@ -523,6 +526,9 @@
               },
               {
                 "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
               }
             ]
           }
