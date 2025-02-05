@@ -98,7 +98,7 @@
         }
       ],
       "on": {
-        "CLIENT_BUILT": [
+        "CLIENT_STARTED": [
           {
             "target": "WAITING_SERVER_PREFACE",
             "actions": [
@@ -129,7 +129,7 @@
         }
       ],
       "on": {
-        "SERVER_BUILT": [
+        "SERVER_STARTED": [
           {
             "target": "WAITING_CLIENT_PREFACE",
             "actions": [
