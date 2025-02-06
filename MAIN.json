@@ -131,38 +131,19 @@
       "on": {
         "SERVER_STARTED": [
           {
-            "target": "WAITING_CLIENT_PREFACE",
-            "actions": [
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (server) (server)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              },
-              {
-                "type": "assign (role) (role)"
-              }
-            ]
-          }
-        ],
-        "TIMEOUT": [
-          {
             "target": "RECEIVING_CLIENT_FRAMES",
             "actions": [
               {
-                "type": "assign (server) (server)"
-              },
-              {
                 "type": "assign (ctrl) (ctrl)"
               },
               {
-                "type": "assign (role) (role)"
+                "type": "assign (server) (server)"
               },
               {
                 "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (role) (role)"
               }
             ]
           }
@@ -207,40 +188,6 @@
             "actions": [
               {
                 "type": "assign (msg) (msg)"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "WAITING_CLIENT_PREFACE": {
-      "entry": [
-        {
-          "type": "wait_for_client_preface (server) (event msg)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "PREFACE_RECEIVED": [
-          {
-            "target": "EXCHANGING_SYNC_PREFACE",
-            "actions": [
-              {
-                "type": "assign (server) (server)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (msg) (msg)"
-              },
-              {
-                "type": "assign (role) (role)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
               }
             ]
           }
@@ -682,6 +629,40 @@
             "actions": [
               {
                 "type": "assign (result) (result)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "WAITING_CLIENT_PREFACE": {
+      "entry": [
+        {
+          "type": "wait_for_client_preface (server) (event msg)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "PREFACE_RECEIVED": [
+          {
+            "target": "EXCHANGING_SYNC_PREFACE",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (msg) (msg)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
               }
             ]
           }
