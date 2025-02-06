@@ -200,7 +200,7 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "receive_client_frames (server client_frames) (event result)"
+          "type": "receive_client_frames (server client_frames) (event result frames_received)"
         },
         {
           "type": "trigger (event)"
