@@ -162,7 +162,7 @@
       "on": {
         "PREFACE_RECEIVED": [
           {
-            "target": "EXCHANGING_SYNC_PREFACE",
+            "target": "WAITING_SERVER_ACK",
             "actions": [
               {
                 "type": "assign (client) (client)"
@@ -206,7 +206,7 @@
       "on": {
         "PREFACE_RECEIVED": [
           {
-            "target": "EXCHANGING_SYNC_PREFACE",
+            "target": "WAITING_CLIENT_ACK",
             "actions": [
               {
                 "type": "assign (server) (server)"
@@ -227,58 +227,6 @@
           }
         ]
       }
-    },
-    "EXCHANGING_SYNC_PREFACE": {
-      "entry": [
-        {
-          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg_received)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "DONE": [
-          {
-            "target": "WAITING_SERVER_ACK",
-            "cond": "equal (role client_val)",
-            "actions": [
-              {
-                "type": "assign (client) (client)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (role) (role)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              }
-            ]
-          },
-          {
-            "target": "WAITING_CLIENT_ACK",
-            "actions": [
-              {
-                "type": "assign (server) (server)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (role) (role)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "FINAL": {
-      "type": "final"
     },
     "WAITING_SERVER_ACK": {
       "entry": [
@@ -313,6 +261,9 @@
           }
         ]
       }
+    },
+    "FINAL": {
+      "type": "final"
     },
     "WAITING_CLIENT_ACK": {
       "entry": [
