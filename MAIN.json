@@ -181,6 +181,16 @@
               }
             ]
           }
+        ],
+        "ERROR": [
+          {
+            "target": "FINAL",
+            "actions": [
+              {
+                "type": "assign (msg) (msg)"
+              }
+            ]
+          }
         ]
       }
     },
@@ -266,6 +276,9 @@
           }
         ]
       }
+    },
+    "FINAL": {
+      "type": "final"
     },
     "WAITING_SERVER_ACK": {
       "entry": [
@@ -635,9 +648,6 @@
           }
         ]
       }
-    },
-    "FINAL": {
-      "type": "final"
     },
     "TIMEOUT": {
       "entry": {
