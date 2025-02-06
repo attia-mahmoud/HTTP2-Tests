@@ -147,6 +147,25 @@
               }
             ]
           }
+        ],
+        "TIMEOUT": [
+          {
+            "target": "RECEIVING_CLIENT_FRAMES",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              }
+            ]
+          }
         ]
       }
     },
@@ -162,7 +181,7 @@
       "on": {
         "PREFACE_RECEIVED": [
           {
-            "target": "WAITING_SERVER_ACK",
+            "target": "EXCHANGING_SYNC_PREFACE",
             "actions": [
               {
                 "type": "assign (client) (client)"
@@ -206,7 +225,7 @@
       "on": {
         "PREFACE_RECEIVED": [
           {
-            "target": "WAITING_CLIENT_ACK",
+            "target": "EXCHANGING_SYNC_PREFACE",
             "actions": [
               {
                 "type": "assign (server) (server)"
@@ -222,6 +241,152 @@
               },
               {
                 "type": "assign (client_val) (client_val)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "RECEIVING_CLIENT_FRAMES": {
+      "entry": [
+        {
+          "type": "get_from_file (variables client_frames) (client_frames)"
+        },
+        {
+          "type": "receive_client_frames (server client_frames) (event result)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "TEST_COMPLETED": [
+          {
+            "target": "SENDING_SERVER_FRAMES",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (result) (result)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (role) (role)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "EXCHANGING_SYNC_PREFACE": {
+      "entry": [
+        {
+          "type": "call (EXCHANGE_SYNC ctrl msg) (event msg_received)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "DONE": [
+          {
+            "target": "WAITING_SERVER_ACK",
+            "cond": "equal (role client_val)",
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              }
+            ]
+          },
+          {
+            "target": "WAITING_CLIENT_ACK",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              }
+            ]
+          }
+        ],
+        "TIMEOUT": [
+          {
+            "target": "SENDING_CLIENT_FRAMES",
+            "cond": "equal (role client_val)",
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "FINAL": {
+      "type": "final"
+    },
+    "SENDING_SERVER_FRAMES": {
+      "entry": [
+        {
+          "type": "get_from_file (variables server_frames) (server_frames)"
+        },
+        {
+          "type": "send_server_frames (server server_frames) (event)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "FRAMES_SENT": [
+          {
+            "target": "EXCHANGING_SYNC_FINISHED",
+            "actions": [
+              {
+                "type": "assign (result) (result)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
               }
             ]
           }
@@ -262,9 +427,6 @@
         ]
       }
     },
-    "FINAL": {
-      "type": "final"
-    },
     "WAITING_CLIENT_ACK": {
       "entry": [
         {
@@ -293,6 +455,83 @@
               },
               {
                 "type": "assign (msg) (msg)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "SENDING_CLIENT_FRAMES": {
+      "entry": [
+        {
+          "type": "get_from_file (variables client_frames) (client_frames)"
+        },
+        {
+          "type": "send_client_frames (client client_frames) (event)"
+        },
+        {
+          "type": "set (CLIENT_FRAMES_SENT) (msg)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "FRAMES_SENT": [
+          {
+            "target": "RECEIVING_SERVER_FRAMES",
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (msg) (msg)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (role) (role)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "EXCHANGING_SYNC_FINISHED": {
+      "entry": [
+        {
+          "type": "call (EXCHANGE_SYNC ctrl result) (event result_received)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "DONE": [
+          {
+            "target": "CLEANUP_CLIENT",
+            "cond": "equal (role client_val)",
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (result) (result)"
+              }
+            ]
+          },
+          {
+            "target": "CLEANUP_SERVER",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (result) (result)"
               }
             ]
           }
@@ -348,83 +587,6 @@
         ]
       }
     },
-    "SENDING_CLIENT_FRAMES": {
-      "entry": [
-        {
-          "type": "get_from_file (variables client_frames) (client_frames)"
-        },
-        {
-          "type": "send_client_frames (client client_frames) (event)"
-        },
-        {
-          "type": "set (CLIENT_FRAMES_SENT) (msg)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "FRAMES_SENT": [
-          {
-            "target": "RECEIVING_SERVER_FRAMES",
-            "actions": [
-              {
-                "type": "assign (client) (client)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (msg) (msg)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              },
-              {
-                "type": "assign (role) (role)"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "RECEIVING_CLIENT_FRAMES": {
-      "entry": [
-        {
-          "type": "get_from_file (variables client_frames) (client_frames)"
-        },
-        {
-          "type": "receive_client_frames (server client_frames) (event result)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "TEST_COMPLETED": [
-          {
-            "target": "SENDING_SERVER_FRAMES",
-            "actions": [
-              {
-                "type": "assign (server) (server)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (result) (result)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              },
-              {
-                "type": "assign (role) (role)"
-              }
-            ]
-          }
-        ]
-      }
-    },
     "RECEIVING_SERVER_FRAMES": {
       "entry": [
         {
@@ -456,80 +618,6 @@
               },
               {
                 "type": "assign (ctrl) (ctrl)"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "SENDING_SERVER_FRAMES": {
-      "entry": [
-        {
-          "type": "get_from_file (variables server_frames) (server_frames)"
-        },
-        {
-          "type": "send_server_frames (server server_frames) (event)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "FRAMES_SENT": [
-          {
-            "target": "EXCHANGING_SYNC_FINISHED",
-            "actions": [
-              {
-                "type": "assign (result) (result)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              },
-              {
-                "type": "assign (role) (role)"
-              },
-              {
-                "type": "assign (server) (server)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "EXCHANGING_SYNC_FINISHED": {
-      "entry": [
-        {
-          "type": "call (EXCHANGE_SYNC ctrl result) (event result_received)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "DONE": [
-          {
-            "target": "CLEANUP_CLIENT",
-            "cond": "equal (role client_val)",
-            "actions": [
-              {
-                "type": "assign (client) (client)"
-              },
-              {
-                "type": "assign (result) (result)"
-              }
-            ]
-          },
-          {
-            "target": "CLEANUP_SERVER",
-            "actions": [
-              {
-                "type": "assign (server) (server)"
-              },
-              {
-                "type": "assign (result) (result)"
               }
             ]
           }
