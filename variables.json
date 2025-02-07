@@ -24,5 +24,19 @@
             ]
         }
     ],
-    "server_frames": []
+    "server_frames": [
+        {
+            "type": "HEADERS",
+            "tests": [
+                [
+                    {
+                        "function": "verifytype",
+                        "params": [
+                            "RequestReceived"
+                        ]
+                    }
+                ]
+            ]
+        }
+    ]
 }
