@@ -317,7 +317,7 @@
           "type": "get_from_file (variables server_frames) (server_frames)"
         },
         {
-          "type": "receive_server_frames (client server_frames) (event result)"
+          "type": "receive_server_frames (client server_frames) (event result frames_received)"
         },
         {
           "type": "trigger (event)"
@@ -461,7 +461,7 @@
       "on": {
         "PREFACE_RECEIVED": [
           {
-            "target": "EXCHANGING_SYNC_PREFACE",
+            "target": "RECEIVING_CLIENT_FRAMES",
             "actions": [
               {
                 "type": "assign (server) (server)"
