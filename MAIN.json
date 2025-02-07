@@ -461,10 +461,10 @@
             "target": "FINAL",
             "actions": [
               {
-                "type": "assign (result) (result)"
+                "type": "assign (result) (client_result)"
               },
               {
-                "type": "assign (result_received) (result_received)"
+                "type": "assign (result_received) (server_result)"
               }
             ]
           }
@@ -474,10 +474,10 @@
             "target": "FINAL",
             "actions": [
               {
-                "type": "assign (result) (result)"
+                "type": "assign (result) (client_result)"
               },
               {
-                "type": "assign (result_received) (result_received)"
+                "type": "assign (result_received) (server_result)"
               }
             ]
           }
@@ -499,10 +499,10 @@
             "target": "FINAL",
             "actions": [
               {
-                "type": "assign (result) (result)"
+                "type": "assign (result) (server_result)"
               },
               {
-                "type": "assign (result_received) (result_received)"
+                "type": "assign (result_received) (client_result)"
               }
             ]
           }
@@ -512,10 +512,10 @@
             "target": "FINAL",
             "actions": [
               {
-                "type": "assign (result) (result)"
+                "type": "assign (result) (server_result)"
               },
               {
-                "type": "assign (result_received) (result_received)"
+                "type": "assign (result_received) (client_result)"
               }
             ]
           }
