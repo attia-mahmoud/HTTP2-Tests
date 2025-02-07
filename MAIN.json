@@ -91,7 +91,7 @@
           "type": "wait (waiting_time)"
         },
         {
-          "type": "call (HTTP2_CLIENT_BUILD) (event client)"
+          "type": "call (HTTP2_CLIENT_BUILD) (event client msg)"
         },
         {
           "type": "trigger (event)"
@@ -122,7 +122,7 @@
     "BUILDING_HTTP2_SERVER": {
       "entry": [
         {
-          "type": "call (HTTP2_SERVER_BUILD) (event server)"
+          "type": "call (HTTP2_SERVER_BUILD) (event server msg)"
         },
         {
           "type": "trigger (event)"
