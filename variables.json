@@ -11,32 +11,7 @@
     "connection_settings_client": {},
     "client_frames": [
         {
-            "type": "HEADERS",
-            "tests": [
-                [
-                    {
-                        "function": "verifytype",
-                        "params": [
-                            "RequestReceived"
-                        ]
-                    }
-                ]
-            ]
+          "type": "HEADERS"
         }
-    ],
-    "server_frames": [
-        {
-            "type": "HEADERS",
-            "tests": [
-                [
-                    {
-                        "function": "verifytype",
-                        "params": [
-                            "RequestReceived"
-                        ]
-                    }
-                ]
-            ]
-        }
-    ]
+      ]
 }
