@@ -451,7 +451,7 @@
     },
     "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT": {
       "entry": {
-        "type": "set (\"Control Channel Timeout after the client sent its frames\") (result)"
+        "type": "set (Control_Channel_Timeout_After_Client_Frames_Sent) (result)"
       }
     },
     "EXCHANGING_SYNC_SERVER_FRAMES_SENT": {
@@ -620,7 +620,7 @@
     },
     "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT": {
       "entry": {
-        "type": "set (\"Control Channel Timeout after the server sent its frames\") (result)"
+        "type": "set (Control_Channel_Timeout_After_Server_Frames_Sent) (result)"
       }
     },
     "WAITING_CLIENT_PREFACE": {
