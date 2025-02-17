@@ -5,7 +5,7 @@
     "controller_conf_filename": "controller_configuration.json",
     "host": "172.236.62.68",
     "port": "7700",
-    "tls_enabled": "false",
+    "tls_enabled": "true",
     "protocol": "h2",
     "connection_settings_server": {},
     "connection_settings_client": {},
@@ -27,12 +27,15 @@
     "server_frames": [
         {
             "type": "HEADERS",
+            "headers": {
+                ":status": "200"
+            },
             "tests": [
                 [
                     {
                         "function": "verifytype",
                         "params": [
-                            "RequestReceived"
+                            "ResponseReceived"
                         ]
                     }
                 ]
