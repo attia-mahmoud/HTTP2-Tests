@@ -231,6 +231,19 @@
               }
             ]
           }
+        ],
+        "CONNECTION_TERMINATED": [
+          {
+            "target": "FINAL",
+            "actions": [
+              {
+                "type": "assign (result) (server_result)"
+              },
+              {
+                "type": "assign (frames_received) (frames_received)"
+              }
+            ]
+          }
         ]
       }
     },
@@ -341,6 +354,12 @@
               }
             ]
           }
+        ],
+        "TIMEOUT": [
+          {
+            "target": "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT",
+            "actions": []
+          }
         ]
       }
     },
@@ -430,6 +449,11 @@
         ]
       }
     },
+    "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT": {
+      "entry": {
+        "type": "set (\"Control Channel Timeout after the client sent its frames\") (result)"
+      }
+    },
     "EXCHANGING_SYNC_SERVER_FRAMES_SENT": {
       "entry": [
         {
@@ -484,6 +508,12 @@
                 "type": "assign (sent_frames) (sent_frames)"
               }
             ]
+          }
+        ],
+        "TIMEOUT": [
+          {
+            "target": "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT",
+            "actions": []
           }
         ]
       }
@@ -586,6 +616,11 @@
             ]
           }
         ]
+      }
+    },
+    "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT": {
+      "entry": {
+        "type": "set (\"Control Channel Timeout after the server sent its frames\") (result)"
       }
     },
     "WAITING_CLIENT_PREFACE": {
