@@ -12,19 +12,19 @@
     "client_frames": [
         {
             "type": "HEADERS",
-            "stream_id" "1"
+            "stream_id": "1"
         },
         {
             "type": "HEADERS",
-            "stream_id" "2"
+            "stream_id": "2"
         },
         {
             "type": "HEADERS",
-            "stream_id" "3"
+            "stream_id": "3"
         },
         {
             "type": "HEADERS",
-            "stream_id" "4"
+            "stream_id": "4"
         }
     ],
     "server_frames": [
