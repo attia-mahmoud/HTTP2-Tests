@@ -253,6 +253,12 @@
     "SENDING_CLIENT_FRAMES": {
       "entry": [
         {
+          "type": "set (1) (waiting_time)"
+        },
+        {
+          "type": "wait (waiting_time)"
+        },
+        {
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
