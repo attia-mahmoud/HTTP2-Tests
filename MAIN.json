@@ -131,7 +131,7 @@
       "on": {
         "SERVER_STARTED": [
           {
-            "target": "WAITING_CLIENT_PREFACE",
+            "target": "RECEIVING_CLIENT_FRAMES",
             "actions": [
               {
                 "type": "assign (ctrl) (ctrl)"
@@ -197,99 +197,6 @@
         ]
       }
     },
-    "WAITING_CLIENT_PREFACE": {
-      "entry": [
-        {
-          "type": "wait_for_client_preface (server) (event msg frames)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "ERROR": [
-          {
-            "target": "FINAL",
-            "actions": [
-              {
-                "type": "assign (msg) (msg)"
-              },
-              {
-                "type": "assign (frames) (frames)"
-              }
-            ]
-          }
-        ],
-        "PREFACE_RECEIVED": [
-          {
-            "target": "RECEIVING_CLIENT_FRAMES",
-            "actions": [
-              {
-                "type": "assign (server) (server)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (msg) (msg)"
-              },
-              {
-                "type": "assign (role) (role)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "SENDING_CLIENT_FRAMES": {
-      "entry": [
-        {
-          "type": "get_from_file (variables client_frames) (client_frames)"
-        },
-        {
-          "type": "send_client_frames (client client_frames) (event sent_frames)"
-        },
-        {
-          "type": "set (CLIENT_FRAMES_SENT) (result)"
-        },
-        {
-          "type": "trigger (event)"
-        }
-      ],
-      "on": {
-        "FRAMES_SENT": [
-          {
-            "target": "EXCHANGING_SYNC_CLIENT_FRAMES_SENT",
-            "actions": [
-              {
-                "type": "assign (client) (client)"
-              },
-              {
-                "type": "assign (ctrl) (ctrl)"
-              },
-              {
-                "type": "assign (result) (result)"
-              },
-              {
-                "type": "assign (client_val) (client_val)"
-              },
-              {
-                "type": "assign (role) (role)"
-              },
-              {
-                "type": "assign (sent_frames) (sent_frames)"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "FINAL": {
-      "type": "final"
-    },
     "RECEIVING_CLIENT_FRAMES": {
       "entry": [
         {
@@ -342,6 +249,52 @@
           }
         ]
       }
+    },
+    "SENDING_CLIENT_FRAMES": {
+      "entry": [
+        {
+          "type": "get_from_file (variables client_frames) (client_frames)"
+        },
+        {
+          "type": "send_client_frames (client client_frames) (event sent_frames)"
+        },
+        {
+          "type": "set (CLIENT_FRAMES_SENT) (result)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "FRAMES_SENT": [
+          {
+            "target": "EXCHANGING_SYNC_CLIENT_FRAMES_SENT",
+            "actions": [
+              {
+                "type": "assign (client) (client)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (result) (result)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (sent_frames) (sent_frames)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "FINAL": {
+      "type": "final"
     },
     "EXCHANGING_SYNC_CLIENT_FRAMES_SENT": {
       "entry": [
@@ -676,6 +629,53 @@
     "TIMEOUT": {
       "entry": {
         "type": "set (TIMEOUT) (result)"
+      }
+    },
+    "WAITING_CLIENT_PREFACE": {
+      "entry": [
+        {
+          "type": "wait_for_client_preface (server) (event msg frames)"
+        },
+        {
+          "type": "trigger (event)"
+        }
+      ],
+      "on": {
+        "ERROR": [
+          {
+            "target": "FINAL",
+            "actions": [
+              {
+                "type": "assign (msg) (msg)"
+              },
+              {
+                "type": "assign (frames) (frames)"
+              }
+            ]
+          }
+        ],
+        "PREFACE_RECEIVED": [
+          {
+            "target": "RECEIVING_CLIENT_FRAMES",
+            "actions": [
+              {
+                "type": "assign (server) (server)"
+              },
+              {
+                "type": "assign (ctrl) (ctrl)"
+              },
+              {
+                "type": "assign (msg) (msg)"
+              },
+              {
+                "type": "assign (role) (role)"
+              },
+              {
+                "type": "assign (client_val) (client_val)"
+              }
+            ]
+          }
+        ]
       }
     }
   }
