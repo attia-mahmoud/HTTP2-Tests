@@ -290,6 +290,16 @@
               }
             ]
           }
+        ],
+        "GOAWAY_RECEIVED": [
+          {
+            "target": "FINAL",
+            "actions": [
+              {
+                "type": "assign (sent_frames) (sent_frames)"
+              }
+            ]
+          }
         ]
       }
     },
