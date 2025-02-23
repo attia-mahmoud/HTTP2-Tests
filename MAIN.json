@@ -370,7 +370,12 @@
         ],
         "TIMEOUT": [
           {
-            "target": "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT",
+            "target": "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_CLIENT",
+            "cond": "equal (role client_val)",
+            "actions": []
+          },
+          {
+            "target": "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_SERVER",
             "actions": []
           }
         ]
@@ -478,9 +483,14 @@
         ]
       }
     },
-    "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT": {
+    "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_CLIENT": {
       "entry": {
-        "type": "set (Control_Channel_Timeout_After_Client_Frames_Sent) (result)"
+        "type": "set (Server_Failed_To_Receive_All_Frames) (result)"
+      }
+    },
+    "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_SERVER": {
+      "entry": {
+        "type": "set (Client_Received_Error_From_Proxy) (result)"
       }
     },
     "EXCHANGING_SYNC_SERVER_FRAMES_SENT": {
@@ -541,7 +551,12 @@
         ],
         "TIMEOUT": [
           {
-            "target": "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT",
+            "target": "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT_CLIENT",
+            "cond": "equal (role client_val)",
+            "actions": []
+          },
+          {
+            "target": "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT_SERVER",
             "actions": []
           }
         ]
@@ -647,9 +662,14 @@
         ]
       }
     },
-    "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT": {
+    "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT_CLIENT": {
       "entry": {
-        "type": "set (Control_Channel_Timeout_After_Server_Frames_Sent) (result)"
+        "type": "set (Server_Received_Error_From_Proxy) (result)"
+      }
+    },
+    "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT_SERVER": {
+      "entry": {
+        "type": "set (Client_Failed_To_Receive_All_Frames) (result)"
       }
     },
     "TIMEOUT": {
