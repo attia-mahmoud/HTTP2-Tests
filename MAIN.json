@@ -372,11 +372,25 @@
           {
             "target": "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_CLIENT",
             "cond": "equal (role client_val)",
-            "actions": []
+            "actions": [
+              {
+                "type": "assign (result) (result)"
+              },
+              {
+                "type": "assign (sent_frames) (sent_frames)"
+              }
+            ]
           },
           {
             "target": "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_SERVER",
-            "actions": []
+            "actions": [
+              {
+                "type": "assign (result) (result)"
+              },
+              {
+                "type": "assign (frames_received) (frames_received)"
+              }
+            ]
           }
         ]
       }
@@ -553,11 +567,31 @@
           {
             "target": "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT_CLIENT",
             "cond": "equal (role client_val)",
-            "actions": []
+            "actions": [
+              {
+                "type": "assign (result) (result)"
+              },
+              {
+                "type": "assign (frames_received) (frames_received)"
+              },
+              {
+                "type": "assign (sent_frames) (sent_frames)"
+              }
+            ]
           },
           {
             "target": "CONTROL_CHANNEL_TIMEOUT_SERVER_FRAMES_SENT_SERVER",
-            "actions": []
+            "actions": [
+              {
+                "type": "assign (result) (result)"
+              },
+              {
+                "type": "assign (frames_received) (frames_received)"
+              },
+              {
+                "type": "assign (sent_frames) (sent_frames)"
+              }
+            ]
           }
         ]
       }
