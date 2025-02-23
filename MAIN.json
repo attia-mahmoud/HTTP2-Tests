@@ -256,10 +256,7 @@
           "type": "get_from_file (variables client_frames) (client_frames)"
         },
         {
-          "type": "send_client_frames (client client_frames) (event sent_frames)"
-        },
-        {
-          "type": "set (CLIENT_FRAMES_SENT) (result)"
+          "type": "send_client_frames (client client_frames) (event sent_frames result)"
         },
         {
           "type": "trigger (event)"
@@ -295,6 +292,9 @@
           {
             "target": "FINAL",
             "actions": [
+              {
+                "type": "assign (result) (msg)"
+              },
               {
                 "type": "assign (sent_frames) (sent_frames)"
               }
@@ -425,7 +425,7 @@
           "type": "get_from_file (variables server_frames) (server_frames)"
         },
         {
-          "type": "send_server_frames (server server_frames) (event sent_frames)"
+          "type": "send_server_frames (server server_frames) (event sent_frames msg)"
         },
         {
           "type": "trigger (event)"
@@ -465,7 +465,13 @@
             "target": "FINAL",
             "actions": [
               {
+                "type": "assign (msg) (msg)"
+              },
+              {
                 "type": "assign (sent_frames) (sent_frames)"
+              },
+              {
+                "type": "assign (frames_received) (frames_received)"
               }
             ]
           }
