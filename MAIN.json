@@ -485,7 +485,7 @@
     },
     "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_CLIENT": {
       "entry": {
-        "type": "set (Server_Failed_To_Receive_All_Frames) (result)"
+        "type": "set (Server_Failed_To_Start_or_Receive_All_Frames) (result)"
       }
     },
     "CONTROL_CHANNEL_TIMEOUT_CLIENT_FRAMES_SENT_SERVER": {
