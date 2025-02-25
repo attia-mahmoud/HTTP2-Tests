@@ -116,6 +116,16 @@
               }
             ]
           }
+        ],
+        "ERROR": [
+          {
+            "target": "FINAL",
+            "actions": [
+              {
+                "type": "assign (msg) (msg)"
+              }
+            ]
+          }
         ]
       }
     },
@@ -207,6 +217,9 @@
         ]
       }
     },
+    "FINAL": {
+      "type": "final"
+    },
     "RECEIVING_CLIENT_FRAMES": {
       "entry": [
         {
@@ -259,9 +272,6 @@
           }
         ]
       }
-    },
-    "FINAL": {
-      "type": "final"
     },
     "SENDING_CLIENT_FRAMES": {
       "entry": [
