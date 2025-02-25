@@ -455,6 +455,19 @@
               }
             ]
           }
+        ],
+        "CONNECTION_TERMINATED": [
+          {
+            "target": "FINAL",
+            "actions": [
+              {
+                "type": "assign (result) (server_result)"
+              },
+              {
+                "type": "assign (frames_received) (frames_received)"
+              }
+            ]
+          }
         ]
       }
     },
