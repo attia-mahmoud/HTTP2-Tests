@@ -524,6 +524,9 @@
               },
               {
                 "type": "assign (frames_received) (frames_received)"
+              },
+              {
+                "type": "assign (result) (result)"
               }
             ]
           }
