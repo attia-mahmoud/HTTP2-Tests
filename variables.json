@@ -9,22 +9,20 @@
     "protocol": "h2",
     "connection_settings_server": {},
     "connection_settings_client": {},
+    "cloudflare_origin": "true",
     "client_frames": [
         {
             "type": "HEADERS",
-            "stream_id": 1
-        },
-        {
-            "type": "HEADERS",
-            "stream_id": 2
-        },
-        {
-            "type": "HEADERS",
-            "stream_id": 3
-        },
-        {
-            "type": "HEADERS",
-            "stream_id": 4
+            "tests": [
+                [
+                    {
+                        "function": "verifytype",
+                        "params": [
+                            "RequestReceived"
+                        ]
+                    }
+                ]
+            ]
         }
     ],
     "server_frames": [
