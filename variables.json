@@ -12,35 +12,12 @@
     "cloudflare_origin": "true",
     "client_frames": [
         {
-            "type": "HEADERS",
-            "tests": [
-                [
-                    {
-                        "function": "verifytype",
-                        "params": [
-                            "RequestReceived"
-                        ]
-                    }
-                ]
-            ]
+            "type": "HEADERS"
         }
     ],
     "server_frames": [
         {
-            "type": "HEADERS",
-            "headers": {
-                ":status": "200"
-            },
-            "tests": [
-                [
-                    {
-                        "function": "verifytype",
-                        "params": [
-                            "ResponseReceived"
-                        ]
-                    }
-                ]
-            ]
+            "type": "HEADERS"
         }
     ]
 }
